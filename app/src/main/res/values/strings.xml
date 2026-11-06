@@ -28,6 +28,10 @@
     <string name="filter_by_messaging_app">Фильтр по приложению</string>
 
 
-    <string name="permission_required_message">Чтобы отобразить контакты, необходим доступ к списку контактов на устройстве</string>"
-    <string name="ask_permission_button">Разрешить доступ</string>"
+    <string name="permission_required_message">Чтобы отобразить контакты, необходим доступ к списку контактов на устройстве</string>
+    "
+    <string name="ask_permission_button">Разрешить доступ</string>
+    <string name="playlist">Плейлист</string>
+    <string name="favorites">Избранное</string>
+    <string name="settings">Настройки</string>"
 </resources>

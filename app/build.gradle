@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    compileSdk 35
+    compileSdk = 36
     namespace = "ru.yandex.practicum.contacts"
 
     defaultConfig {
@@ -48,7 +48,11 @@ android {
 }
 
 dependencies {
-    def composeBom = platform('androidx.compose:compose-bom:2025.07.00')
+    implementation 'androidx.activity:activity-ktx:1.13.0'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'com.google.android.material:material:1.10.0'
+    def composeBom = platform('androidx.compose:compose-bom:2024.12.01')
     implementation composeBom
     androidTestImplementation composeBom
 
