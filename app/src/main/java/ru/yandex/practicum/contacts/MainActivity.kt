@@ -3,9 +3,7 @@ package ru.yandex.practicum.contacts
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.compose.setContent
-import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.foundation.background
 import androidx.compose.ui.res.stringResource
 import androidx.compose.foundation.layout.*
@@ -19,77 +17,76 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import android.content.Intent
-import android.app.Activity
+import androidx.activity.ComponentActivity
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            PlaylistMakerScreen()
+            PlaylistHost()
         }
     }
 }
 
 @Composable
-fun PlaylistMakerScreen() {
+fun MainScreen(
+    onSearchClick: () -> Unit,
+    onSettingsClick: () -> Unit
+) {
     Column(
         modifier = Modifier
+            .fillMaxSize()
             .background(Color(0xFFF0F2F5))
     ) {
         Box(
             modifier = Modifier
-                .fillMaxHeight()
+                .fillMaxWidth()
                 .height(56.dp)
                 .background(Color(0xFF3F51B5)),
             contentAlignment = Alignment.CenterStart
         ) {
+            androidx.compose.material3.Text(
+                text = "Playlist maker",
+                color = Color.White,
+                fontSize = 20.sp,
+                modifier = Modifier.padding(16.dp)
+            )
+        }
+
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(Color.White, RoundedCornerShape(12.dp))
+                .padding(16.dp)
+        ) {
             Column {
-                androidx.compose.material3.Text(
-                    text = "Playlist maker",
-                    color = Color.White,
-                    fontSize = 20.sp,
-                    modifier = Modifier.padding(16.dp)
-                )
-                Box(
-                    modifier = Modifier
-                        .fillMaxHeight()
-                        .background(Color.White, RoundedCornerShape(12.dp))
-                        .padding(16.dp)
-                ) {
-                    Column {
-                        MenuItem(Icons.Default.Search, stringResource(R.string.menu_search),
-                            SearchActivity::class.java)
-                        Divider()
-                        MenuItem(Icons.Default.List, stringResource(R.string.playlist), SearchActivity::class.java)
-                        Divider()
-                        MenuItem(Icons.Default.Favorite, stringResource(R.string.favorites), SearchActivity::class.java)
-                        Divider()
-                        MenuItem(Icons.Default.Settings, stringResource(R.string.settings), SettingsActivity::class.java)
-                    }
-                }
+                MenuItem(Icons.Default.Search, stringResource(R.string.menu_search), onSearchClick)
+                Divider()
+                MenuItem(Icons.Default.List, stringResource(R.string.playlist), onSearchClick)
+                Divider()
+                MenuItem(Icons.Default.Favorite, stringResource(R.string.favorites), onSearchClick)
+                Divider()
+                MenuItem(Icons.Default.Settings, stringResource(R.string.settings), onSettingsClick)
             }
         }
     }
 }
 
 @Composable
-fun MenuItem(icon: ImageVector, title: String, targetActivity: Class<out Activity>) {
-    val context = LocalContext.current
+fun MenuItem(
+    icon: ImageVector,
+    title: String,
+    onClick: () -> Unit
+) {
     Button(
-        onClick = {
-            val intent = Intent(context, targetActivity)
-            context.startActivity(intent)
-        },
+        onClick = onClick,
         colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent),
         contentPadding = PaddingValues(0.dp),
         modifier = Modifier.fillMaxWidth()
-    )
-    {
+    ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -127,10 +124,4 @@ fun Divider() {
             .height(1.dp)
             .background(Color(0xFFEEEEEE))
     )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun PlaylistMakerPreview() {
-    PlaylistMakerScreen()
 }
