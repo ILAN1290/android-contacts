@@ -20,6 +20,8 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.activity.ComponentActivity
+import androidx.compose.material3.Text
+import ru.yandex.practicum.contacts.ui.navigation.PlaylistHost
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,7 +50,7 @@ fun MainScreen(
                 .background(Color(0xFF3F51B5)),
             contentAlignment = Alignment.CenterStart
         ) {
-            androidx.compose.material3.Text(
+            Text(
                 text = "Playlist maker",
                 color = Color.White,
                 fontSize = 20.sp,
@@ -100,7 +102,7 @@ fun MenuItem(
                 modifier = Modifier.size(24.dp)
             )
             Spacer(modifier = Modifier.width(16.dp))
-            androidx.compose.material3.Text(
+            Text(
                 text = title,
                 modifier = Modifier.weight(1f),
                 fontSize = 16.sp,
